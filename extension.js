@@ -1,26 +1,58 @@
-const Food= document.getElementById("Food");
-const convert= document.getElementById("convert");
-const result= document.getElementById("result");
+document.addEventListener('DOMContentLoaded', function () {
+    const Food = document.getElementById("Food");
+    const convert = document.getElementById("convert");
+    const query = document.getElementById("query");
 
+    const apiKey = "aodQTDcVETHdbLN50Tg52A9wvzmpQVEELM9akRnX";
+    const apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=";
 
-const API_KEY="gw8vN5Dsy2J2rxiGbNqzzQ==lmV7Shksi5uMcvju"
-const API_URL="https://api.api-ninjas.com/v1/nutrition?query="
+    convert.addEventListener("click", () => {
+        const foodtotal = Food.value;
+        const url = apiUrl + foodtotal;
 
-convert.addEventListener('click',() =>{
-    const foodtotal=Food.value;
-    const convertTotal= convert.value;
-    const url= API_URL + foodtotal
+        fetch(url, {
+            headers: {
+                "X-API-KEY": apiKey,
+            },
+        })
+        .then(response => response.json())
+        .then(dataArray => {
+            // Assuming the API returns an array, use the first item in the array
+            const data = dataArray[0];
 
-  $.ajax({
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/nutrition?query=' + query,
-    headers: { 'X-Api-Key': 'YOUR_API_KEY'},
-    contentType: 'application/json',
-    success: function(result) {
-        console.log(result);
-    },
-    error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-    }
+            if (data) {
+                const namef = data.name;
+                const calories = data.calories;
+                const serving = data.serving_size_g;
+                const fatTotal = data.fat_total_g;
+                const fatSaturated = data.fat_saturated_g;
+                const protein = data.protein_g;
+                const sodium = data.sodium_mg;
+                const potassium = data.potassium_mg;
+                const cholesterol = data.cholesterol_mg;
+                const carbohydrates = data.carbohydrates_total_g;
+                const fiber = data.fiber_g;
+                const sugar = data.sugar_g;
+
+                query.innerHTML = `Nutritional Facts for ${namef}: 
+                  Calories - ${calories || 'Unknown'}, 
+                  Serving Size - ${serving || 'Unknown'}, 
+                  Fat - ${fatTotal || 'Unknown'}, 
+                  Saturated Fat - ${fatSaturated || 'Unknown'},
+                  Protein - ${protein || 'Unknown'}, 
+                  Sodium - ${sodium || 'Unknown'}, 
+                  Potassium - ${potassium || 'Unknown'}, 
+                  Cholesterol - ${cholesterol || 'Unknown'}, 
+                  Carbohydrates - ${carbohydrates || 'Unknown'}, 
+                  Fiber - ${fiber || 'Unknown'}, 
+                  Sugar - ${sugar || 'Unknown'}`;
+            } else {
+                console.error('No data found for the given food.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            alert('An error occurred while fetching data. Please try again later.');
+        });
+    });
 });
-})
