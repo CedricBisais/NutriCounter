@@ -1,0 +1,12 @@
+{
+    "name":"Nutri Counter", 
+    "version": "1.0",
+    "manifest_version": 3,
+    "description":"Displays the nutrients kineme",
+    "action":{
+        "default_icon":"icon.jpg",
+        "default_popup":"index.html"
+
+    }
+
+}
