@@ -11,13 +11,16 @@ convert.addEventListener('click',() =>{
     const convertTotal= convert.value;
     const url= API_URL + foodtotal
 
-    fetch(url,{
-        headers: {
-            'X-API-KEY': API_KEY
-        }
-    }) 
-    .then(response => response.json())
-    .then(data => {
-        console.log('Food: ' + result)
-    })   
+  $.ajax({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/nutrition?query=' + query,
+    headers: { 'X-Api-Key': 'YOUR_API_KEY'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
 })
