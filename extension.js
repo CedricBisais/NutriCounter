@@ -34,18 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fiber = data.fiber_g;
                 const sugar = data.sugar_g;
 
-                query.innerHTML = `Nutritional Facts for ${namef}: 
-                  Calories - ${calories || 'Unknown'}, 
-                  Serving Size - ${serving || 'Unknown'}, 
-                  Fat - ${fatTotal || 'Unknown'}, 
-                  Saturated Fat - ${fatSaturated || 'Unknown'},
-                  Protein - ${protein || 'Unknown'}, 
-                  Sodium - ${sodium || 'Unknown'}, 
-                  Potassium - ${potassium || 'Unknown'}, 
-                  Cholesterol - ${cholesterol || 'Unknown'}, 
-                  Carbohydrates - ${carbohydrates || 'Unknown'}, 
-                  Fiber - ${fiber || 'Unknown'}, 
-                  Sugar - ${sugar || 'Unknown'}`;
+                query.innerHTML = `<span class="nutrient">Nutritional Facts for ${namef}: </span> <br>
+                <span class="nutrient">Calories - ${calories || '0'} </span><br>
+                <span class="nutrient">Serving Size - ${serving || '0'} </span><br>
+                <span class="nutrient">Fat - ${fatTotal || '0'} </span><br>
+                <span class="nutrient">Saturated Fat - ${fatSaturated || '0'} </span><br>
+                <span class="nutrient">Protein - ${protein || '0'} </span><br>
+                <span class="nutrient">Sodium - ${sodium || '0'} </span><br>
+                <span class="nutrient">Potassium - ${potassium || '0'} </span><br>
+                <span class="nutrient">Cholesterol - ${cholesterol || '0'} </span><br>
+                <span class="nutrient">Carbohydrates - ${carbohydrates || '0'} </span><br>
+                <span class="nutrient">Fiber - ${fiber || '0'} </span><br>
+                <span class="nutrient">Sugar - ${sugar || '0'} </span>`;
+
             } else {
                 console.error('No data found for the given food.');
             }
